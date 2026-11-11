@@ -1,0 +1,20 @@
+FROM python:3.11-slim
+
+ENV PYTHONDONTWRITEBYTECODE=1 \
+    PYTHONUNBUFFERED=1 \
+    PIP_NO_CACHE_DIR=1 \
+    PYTHONPATH=/app/src
+
+WORKDIR /app
+
+# CPU-only PyTorch keeps the image much smaller than the default CUDA build.
+RUN pip install torch --index-url https://download.pytorch.org/whl/cpu
+
+COPY requirements.txt requirements-local-embeddings.txt ./
+RUN pip install -r requirements.txt -r requirements-local-embeddings.txt
+
+COPY src ./src
+
+# Default job: train the baseline. Override with e.g.
+#   docker run ... tickettriage-train:dev python -m tickettriage.embeddings
+CMD ["python", "-m", "tickettriage.train"]

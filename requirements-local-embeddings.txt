@@ -1,0 +1,4 @@
+# Only needed for EMBEDDING_BACKEND=local. Installs PyTorch (large).
+# On a CPU-only machine, install torch first from the CPU index:
+#   pip install torch --index-url https://download.pytorch.org/whl/cpu
+sentence-transformers>=2.7

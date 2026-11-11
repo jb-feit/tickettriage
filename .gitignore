@@ -1,0 +1,21 @@
+# secrets and local config
+.env
+*.pem
+
+# python
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+.ruff_cache/
+
+# data and model outputs (kept in S3, not in Git)
+data/*
+!data/.gitkeep
+artifacts/*
+!artifacts/.gitkeep
+
+# editor / OS
+.vscode/
+.idea/
+.DS_Store
